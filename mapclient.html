@@ -16,7 +16,7 @@
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    const map = L.map('map').setView([51.505, -0.09], 13);
+    const map = L.map('map').setView([47.55, 14.14], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
@@ -24,9 +24,25 @@
     // Fetch coordinates from server
     fetch('http://127.0.0.1:3000/coordinates')
       .then(response => response.json())
-      .then(coordinates => {
-        coordinates.forEach(coord => {
-          L.marker([coord.lat, coord.lng]).addTo(map);
+      .then(data => {
+        data.forEach(entry => {
+            if (!entry) {return}
+            //let coords = ["1","2"]
+            let coords;
+            try{ 
+             coords = entry.coordinates.split(',')
+            } catch {
+                 coords = ["42","18"]
+                console.error(entry.id)
+            
+        }
+          const marker = L.marker([coords[0], coords[1]]).addTo(map);
+          // Bind popup with additional information
+          marker.bindPopup(`<b>${entry.heading}</b><br>${entry.description}`);
+          // Add click event listener to show popup
+          marker.on('click', () => {
+            marker.openPopup();
+          });
         });
       });
   </script>
