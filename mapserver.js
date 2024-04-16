@@ -13,7 +13,7 @@ app.listen(PORT, () => {
 
 let data = {};
 
-willhaben.getListings('https://www.willhaben.at/iad/kaufen-und-verkaufen/marktplatz/pc-komponenten/-5882?keyword=rtx&rows=1000').then(json => {
+willhaben.getListings('https://www.willhaben.at/iad/gebrauchtwagen/motorrad/motorradboerse?MC_MODEL/MAKE=7771&keyword=exc%20f&YEAR_MODEL_FROM=2012&PRICE_TO=7000&rows=1000').then(json => {
     console.log(json)
     data = json;
 })

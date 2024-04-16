@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     #map {
-      height: 400px;
+      height: 80vh;
     }
   </style>
 </head>
@@ -38,7 +38,7 @@
         }
           const marker = L.marker([coords[0], coords[1]]).addTo(map);
           // Bind popup with additional information
-          marker.bindPopup(`<b>${entry.heading}</b><br>${entry.description}`);
+          marker.bindPopup(`<a href="https://willhaben.at/iad/${entry.seo_url}" target="_blank"><b>${entry.heading}</b></a><br>${entry.description}`);
           // Add click event listener to show popup
           marker.on('click', () => {
             marker.openPopup();

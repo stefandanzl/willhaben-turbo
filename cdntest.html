@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Page</title>
+    <!-- Include the willhaben.js file -->
+    <script src="/willhaben.js"></script>
+</head>
+<body>
+    <!-- Your HTML content here -->
+    <h1>Welcome to My Web Page</h1>
+    <!-- Example usage of the WillhabenSearch class -->
+    <script>
+        const search = new WillhabenSearch();
+        search.category(0).count(10).search().then(listings => {
+            console.log(listings); // Handle the listings data here
+        }).catch(error => {
+            console.error('Error fetching listings:', error);
+        });
+    </script>
+</body>
+</html>
