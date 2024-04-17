@@ -6,19 +6,38 @@
   <title>Map Visualization</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
+    body {
+    margin: 0;
+
+    }
     #map {
-      height: 80vh;
+      height: 60vh;
+    }
+    #article {
+        display: flex;
+        flex-wrap: wrap;
+        max-height: 26vh;
+        overflow: auto;
+    }
+    #article img {
+        max-height: 25vh;
+        max-width: auto;
+        margin: 5px;
+    }
+    .leaflet-control-attribution {
+        display: none;
     }
   </style>
 </head>
 <body>
   <div id="map"></div>
+  <div id="article"></div>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     const map = L.map('map').setView([47.55, 14.14], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
+      
     }).addTo(map);
 
     // Fetch coordinates from server
@@ -38,13 +57,89 @@
         }
           const marker = L.marker([coords[0], coords[1]]).addTo(map);
           // Bind popup with additional information
-          marker.bindPopup(`<a href="https://willhaben.at/iad/${entry.seo_url}" target="_blank"><b>${entry.heading}</b></a><br>${entry.description}`);
+          marker.bindPopup(`<a href="https://willhaben.at/iad/${entry.seo_url}" target="_blank"><b>${entry.heading}</b></a><br>${entry.price_for_display}<br>`);
           // Add click event listener to show popup
           marker.on('click', () => {
             marker.openPopup();
+            addImages(entry);
           });
         });
       });
+
+      function addImages(entry) {
+        const articleDiv = document.getElementById('article');
+
+        // Clear existing images
+        articleDiv.innerHTML = '';
+
+        const images = entry.all_image_urls.split(';');
+
+        // Add new images
+        for (let i = 0; i < images.length; i++) {
+            const img = document.createElement('img');
+            img.src = `https://cache.willhaben.at/mmo/${images[i]}`; // Replace with actual image source
+            articleDiv.appendChild(img);
+        }
+    }
+
+
   </script>
 </body>
 </html>
+
+
+
+<!--  
+
+    {
+    id: '1903395294',
+    verticalId: 5,
+    adTypeId: 67,
+    productId: 67,
+    advertStatus: { id: 'active', description: 'aktiv', statusId: 50 },
+    description: 'Gigabyte RTX 3080 Ti Preis VHB [Funktioniert Einwandfrei]',
+    selfLink: 'https://api.willhaben.at/restapi/v2/atverz/1903395294',
+    upsellingOrganisationLogo: null,
+    teaserAttributes: [],
+    children: null,
+    location: 'Linz',
+    p2penabled: 'true',
+    changed: 1712945400000,
+    categorytreeattributeids: '[2535;2537, 2535;2536, 21;2546, 5008971;5008972]',
+    changed_string: '2024-04-12T20:10:00Z',
+    postcode: 4020,
+    price_reduction_set_date: 1712945367322,
+    body_dyn: 'Die Grafikkarte ist in einem sehr Guten Zustand und wurde vor 1-2 Jahren für 1.900€ Gekauft. Auf Wunsch vor Ort Testen Möglich. wurde nie Übertaktet und rein für Gaming verwendet [ Warzone & Fortnite hauptsächlich ] RAM-Typ der Grafikkarte ‎: GDDR6X...',
+    state: 'Oberösterreich',
+    price_reduction_set_date_string: '2024-04-12T20:09:27Z',
+    result_list_style2: 'style2',
+    org_uuid: '5afb5063-7c1d-411c-ace5-e2c91a4831c9',
+    heading: 'Gigabyte RTX 3080 Ti Preis VHB [Funktioniert Einwandfrei]',
+    district: 'Linz',
+    published: 1712824920000,
+    country: 'Österreich',
+    'price/amount': 999,
+    enddate_string: '2024-05-19T10:41:00Z',
+    adtype_id: 67,
+    adid: 1903395294,
+    orgid: 25293881,
+    segment: 1,
+    seo_url: 'kaufen-und-verkaufen/d/gigabyte-rtx-3080-ti-preis-vhb-funktioniert-einwandfrei-1903395294/',
+    all_image_urls: '4/190/339/5294_-1580538956.jpg;4/190/339/5294_-1115049309.jpg;4/190/339/5294_584764644.jpg',
+    published_string: '2024-04-11T10:42:00Z',
+    isprivate: 1,
+    categorytreeids: '5824;5878;5882',
+    product_id: 67,
+    is_bumped: 1,
+    mmo: '4/190/339/5294_-1580538956.jpg',
+    enddate: 1716108060000,
+    ad_uuid: 'f70bfe5e-a28a-4e88-a714-b34e9d305250',
+    address: 'Hasnerstraße 13-15',
+    old_price: 1000,
+    coordinates: '48.2857,14.29882',
+    price: 999,
+    price_for_display: '€ 999',
+    old_price_for_display: '€ 1.000'
+  },
+
+-->
