@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const willhaben = require('willhaben')
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.static('public'));
@@ -20,6 +20,7 @@ willhaben.getListings('https://www.willhaben.at/iad/gebrauchtwagen/motorrad/moto
 
 
 app.get('/coordinates', (req, res) => {
+    console.log("request")
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');

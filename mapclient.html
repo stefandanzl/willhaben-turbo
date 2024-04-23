@@ -27,9 +27,43 @@
     .leaflet-control-attribution {
         display: none;
     }
+    #search-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    #search-input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 300px;
+    }
+
+    #search-button {
+      padding: 10px;
+      border: 1px solid #007bff;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    #search-button:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
+  <div id="header">
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder="Search...">
+      <button id="search-button">Search</button>
+    </div>
+
+
+  </div>
   <div id="map"></div>
   <div id="article"></div>
 
@@ -41,8 +75,9 @@
     }).addTo(map);
 
     // Fetch coordinates from server
-    fetch('http://127.0.0.1:3000/coordinates', {method: 'GET', mode: "no-cors"})
-      .then(response => response.json())
+    fetch('http://127.0.0.1:4000/coordinates')
+      .then(response => 
+        response.json())
       .then(data => {
         data.forEach(entry => {
             if (!entry) {return}
