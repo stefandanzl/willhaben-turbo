@@ -41,7 +41,7 @@
     }).addTo(map);
 
     // Fetch coordinates from server
-    fetch('http://127.0.0.1:3000/coordinates')
+    fetch('http://127.0.0.1:3000/coordinates', {method: 'GET', mode: "no-cors"})
       .then(response => response.json())
       .then(data => {
         data.forEach(entry => {

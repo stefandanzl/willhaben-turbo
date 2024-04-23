@@ -20,11 +20,9 @@ willhaben.getListings('https://www.willhaben.at/iad/gebrauchtwagen/motorrad/moto
 
 
 app.get('/coordinates', (req, res) => {
-  // You would fetch your coordinates data from a database or another source
-//   const coordinates = [
-//     { id: 1, lat: 51.505, lng: -0.09, name: 'Location 1', description: 'This is location 1' },
-//     { id: 2, lat: 51.51, lng: -0.1, name: 'Location 2', description: 'This is location 2' },
-//     // Add more coordinates with additional information as needed
-//   ];
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
   res.json(data);
 });
